@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>We Do</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">We Do</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/wedo.mp4" id="wedo" controls></video>
+<p>Time (in seconds): <span id="timer"></span></p>
+<div id="lyrics"></div>
+
+<p><button type="button" onclick="video.play();">Play</button>
+<button type="button" onclick="video.pause();">Pause</button>
+<button type="button" onclick="video.currentTime = video.currentTime - 1;"><< Rewind</button>
+<button type="button" onclick="video.currentTime = video.currentTime + 1">>> Forward</button>
+</p>
+
+<script type="text/javascript">
+	
+	var video = document.getElementById("video");
+	var lyrics = document.getElementById("lyrics");
+	var timer = document.getElementById("timer");
+	video.addEventListener("timeupdate", function() {
+		console.log("Hello Nate!");
+		timer.innerHTML = video.currentTime;
+		
+		if (video.currentTime < 3) {
+			lyrics.innerHTML ="<h3>Hello</h3>";
+		}
+		else if (video.currentTime > 4 && video.currentTime < 5.5) {
+			lyrics.innerHTML = "<h3>Who controls the British crown?</h3>";
+		}
+		else if (video.currentTime > 5.5 && video.currentTime < 6.5) {
+			lyrics.innerHTML = "<h1>Who keeps the metric system down?</h1>";
+		}
+		else if (video.currentTime > 6.5 && video.currentTime < 16.8) {
+			lyrics.innerHTML = "<h3>We do, we do!</h3>";
+		}
+		else if (video.currentTime > 16.8 && video.currentTime < 18) {
+			lyrics.innerHTML = "<h1>Who keeps Atlantis off the maps?</h1>";
+		}
+		else if (video.currentTime > 18 && video.currentTime < 20) {
+			lyrics.innerHTML = "<h2>Who keeps the Martians under wraps?</h2>";
+		}
+		else if (video.currentTime > 20 && video.currentTime < 22.5) {
+			lyrics.innerHTML = "<h3>We do, we do!</h3>";
+		}
+		else if (video.currentTime > 22.5 && video.currentTime < 24.5) {
+			lyrics.innerHTML = "<h2>Who holds back the electric car?</h2>";
+		}
+		else if (video.currentTime > 24.5 && video.currentTime < 26) {
+			lyrics.innerHTML = "<h1>Who makes Steve Guttenberg a star?</h1>";
+		}
+		else if (video.currentTime > 26 && video.currentTime < 32.3) {
+			lyrics.innerHTML = "<h3>We do, we do!</h3>";
+		}
+		else if (video.currentTime > 32.3 && video.currentTime < 52) {
+			lyrics.innerHTML = "<h1>Who robs cavefish of their sight?</h2>";
+		}
+		else if (video.currentTime > 32.3 && video.currentTime < 52) {
+			lyrics.innerHTML = "<h2>Who rigs every Oscar night?</h2>";
+		}
+		else if (video.currentTime > 32.3 && video.currentTime < 52) {
+			lyrics.innerHTML = "We do!</h2>";
+		}
+		else if (video.currentTime > 52) {
+			lyrics.innerHTML = "<h3>Thanks For Watching!</h3>";
+		}
+		else {
+			lyrics.innerHTML ="";
+		}
+		}, false);
+	// Complete this section and create a CSS file named style.css
+</script>
+</body>
+</html>	
