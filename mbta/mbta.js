@@ -5,30 +5,90 @@
           center: {lat: 42.352271, lng: -71.05524200000001},
           zoom: 14
         };
+        function gettraindata(Marker){
+        //console.log("in function");
+
+        var request = new XMLHttpRequest();
+        //console.log(Marker.stop_id);
+        url = "https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=" + Marker.stop_id;
+        //console.log(url);
+        request.open("GET", url, true);
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4 && request.status == 200) {
+              //console.log("in if statement");
+              dat = request.responseText;
+              //console.log(dat);
+              loc = JSON.parse(dat);
+              //console.log(loc);
+              print = "Upcoming departures: ";
+              //console.log("loc" + loc.data.length);
+              for (var i = 0; i < loc.data.length; i++) {
+                //console.log("in for loop");
+                //elem = document.getElementById("departure_time");
+                  elem = loc.data[i].attributes;
+                  if(elem != null)
+                  {
+                    //console.log("in not null if");
+                      check = loc.data[i].attributes.departure_time;
+                      if(check ==  null){
+                        print += "time not aval ";
+                      }else{
+                        //console.log("in else statement");
+                        print += loc.data[i].attributes.departure_time;
+                        print += " ";
+                        //console.log(print);
+                      }
+                
+                  }else{
+                    //console.log("in main else");
+                  }
+
+                }
+                //print = "hello";
+              //console.log("print is " + print);
+              var infowind = new google.maps.InfoWindow({
+                  content: print
+              });
+              //console.log(infowind.content);
+              Marker.addListener('click', function() {
+                      infowind.open(map, Marker);
+                });
+              //return "hi";
+              elem = document.getElementById("location");
+              /// do stuff with data here
+            }
+            else if (request.readyState == 4 && request.status != 200) {
+                //console.log("in else statement");
+              // think 404 or 500
+                document.getElementById("location").innerHTML = "<p>Whoops, something went terribly wrongo</p>";
+              }
+
+          };
+
+          request.send(null);
+      }
         map = new google.maps.Map(document.getElementById('map'), options);
         stationarr = [];
-
-        var infowindA = new google.maps.InfoWindow({
-          		content: 'Alewife'
-        	});
 
          var Alewife = new google.maps.Marker({
           position: {lat: 42.395428, lng: -71.142483},
           title: 'Hello World!',
           icon: 'icons8-arrow-pointing-down-26.png',
-          stop_id: 'place-alfcl'
+          stop_id: 'place-alfcl',
         });
         stationarr.push(Alewife.position);
         //console.log(Alewife.position);
         //console.log(stationarr[0]);
         Alewife.setMap(map);
-        Alewife.addListener('click', function() {
-          		infowindA.open(map, Alewife);
-        	});
-
-        var infowindB = new google.maps.InfoWindow({
-          		content: 'Davis'
-        	});
+        gettraindata(Alewife);
+        // var infowindA = new google.maps.InfoWindow({
+        //      content: gettraindata(Alewife)
+        //   });
+        // console.log(infowindA.content);
+        //Alewife.addListener('click', function() {
+          //		infowindA.open(map, Alewife);
+        	//});
 
         var Davis = new google.maps.Marker({
           position: {lat: 42.39674 , lng: -71.121815},
@@ -38,13 +98,8 @@
         });
         stationarr.push(Davis.position);
         Davis.setMap(map);
-        Davis.addListener('click', function() {
-          		infowindB.open(map, Davis);
-        	});
+        gettraindata(Davis);
 
-        var infowindC = new google.maps.InfoWindow({
-          		content: 'Porter'
-        	});
 
         var Porter = new google.maps.Marker({
           position: {lat:  42.3884 , lng: -71.11914899999999},
@@ -54,13 +109,7 @@
         });
         stationarr.push(Porter.position);
         Porter.setMap(map);
-        Porter.addListener('click', function() {
-          		infowindC.open(map, Porter);
-        	});
-
-        var infowindD = new google.maps.InfoWindow({
-          		content: 'Harvard'
-        	});
+        gettraindata(Porter);
 
         var Harvard = new google.maps.Marker({
           position: {lat: 42.373362, lng: -71.118956},
@@ -70,15 +119,9 @@
         });
         stationarr.push(Harvard.position);
         Harvard.setMap(map);
-        Harvard.addListener('click', function() {
-          		infowindD.open(map, Harvard);
-        	});
+        gettraindata(Harvard);
 
 
-        var infowindE = new google.maps.InfoWindow({
-          		content: 'Central'
-        	});
-        
         var Central = new google.maps.Marker({
           position: {lat: 42.365486, lng:  -71.103802},
           title: 'Hello World!',
@@ -87,15 +130,8 @@
         });
         stationarr.push(Central.position);
         Central.setMap(map);
-        Central.addListener('click', function() {
-          		infowindE.open(map, Central);
-        	});
+        gettraindata(Central);
 
-
-
-        var infowindF = new google.maps.InfoWindow({
-          		content: 'Kendall'
-        	});
 
         var Kendall = new google.maps.Marker({
           position: {lat: 42.36249079, lng:  -71.08617653},
@@ -105,14 +141,7 @@
         });
         stationarr.push(Kendall.position);
         Kendall.setMap(map);
-        Kendall.addListener('click', function() {
-          		infowindF.open(map, Kendall);
-        	});
-
-
-        var infowindG = new google.maps.InfoWindow({
-          		content: 'Charles'
-        	});
+        gettraindata(Kendall);
 
         var Charles = new google.maps.Marker({
           position: {lat: 42.361166, lng:  -71.070628},
@@ -122,14 +151,8 @@
         });
         stationarr.push(Charles.position);
         Charles.setMap(map);
-        Charles.addListener('click', function() {
-          		infowindG.open(map, Charles);
-        	});
-
-
-        var infowindH = new google.maps.InfoWindow({
-          		content: 'Park'
-        	});
+        gettraindata(Charles);
+  
 
         var Park = new google.maps.Marker({
           position: {lat: 42.35639457, lng:  -71.0624242},
@@ -139,14 +162,7 @@
         });
         stationarr.push(Park.position);
         Park.setMap(map);
-        Park.addListener('click', function() {
-          		infowindH.open(map, Park);
-        	});
-
-
-        var infowindI = new google.maps.InfoWindow({
-          		content: 'Crossing'
-        	});
+        gettraindata(Park);
 
         var Crossing = new google.maps.Marker({
           position: {lat: 42.355518, lng:  -71.060225},
@@ -156,14 +172,8 @@
         });
         stationarr.push(Crossing.position);
         Crossing.setMap(map);
-        Crossing.addListener('click', function() {
-          		infowindI.open(map, Crossing);
-        	});
+        gettraindata(Crossing);
 
-
-        var infowindJ = new google.maps.InfoWindow({
-          		content: 'South'
-        	});
 
         var South = new google.maps.Marker({
           position: {lat: 42.352271, lng:  -71.05524200000001},
@@ -173,13 +183,7 @@
         });
         stationarr.push(South.position);
         South.setMap(map);
-        South.addListener('click', function() {
-          		infowindJ.open(map, South);
-        	});
-
-        var infowindK = new google.maps.InfoWindow({
-          		content: 'Broadway'
-        	});
+        gettraindata(South);
 
         var Broadway = new google.maps.Marker({
           position: {lat: 42.342622, lng:  -71.056967},
@@ -189,13 +193,7 @@
         });
         stationarr.push(Broadway.position);
         Broadway.setMap(map);
-        Broadway.addListener('click', function() {
-          		infowindK.open(map, Broadway);
-        	});
-
-        var infowindL = new google.maps.InfoWindow({
-          		content: 'Andrew'
-        	});
+        gettraindata(Broadway);
 
         var Andrew = new google.maps.Marker({
           position: {lat: 42.330154, lng: -71.057655},
@@ -205,13 +203,7 @@
         });
         stationarr.push(Andrew.position);
         Andrew.setMap(map);
-        Andrew.addListener('click', function() {
-          		infowindL.open(map, Andrew);
-        	});
-
-        var infowindM = new google.maps.InfoWindow({
-          		content: 'JFK'
-        	});
+        gettraindata(Andrew);
 
         var redbreak = [];
 
@@ -224,13 +216,7 @@
         stationarr.push(JFK.position);
         redbreak.push(JFK.position);
         JFK.setMap(map);
-        JFK.addListener('click', function() {
-          		infowindM.open(map, JFK);
-        	});
-
-        var infowindN = new google.maps.InfoWindow({
-          		content: 'NorQuincy'
-        	});
+        gettraindata(JFK);
 
         var NorQuincy = new google.maps.Marker({
           position: {lat: 42.275275, lng: -71.029583},
@@ -241,14 +227,8 @@
 
         redbreak.push(NorQuincy.position);
         NorQuincy.setMap(map);
-        NorQuincy.addListener('click', function() {
-          		infowindN.open(map, NorQuincy);
-        	});
+        gettraindata(NorQuincy);
 
-
-        var infowindO = new google.maps.InfoWindow({
-          		content: 'Wollaston'
-        	});
 
         var Wollaston = new google.maps.Marker({
           position: {lat: 42.2665139, lng: -71.0203369},
@@ -259,13 +239,8 @@
 
         redbreak.push(Wollaston.position);
         Wollaston.setMap(map);
-        Wollaston.addListener('click', function() {
-          		infowindO.open(map, Wollaston);
-        	});
-
-        var infowindP = new google.maps.InfoWindow({
-          		content: 'Qcenter'
-        	});
+        gettraindata(Wollaston);
+       
 
         var Qcenter = new google.maps.Marker({
           position: {lat: 42.251809, lng: -71.005409},
@@ -276,13 +251,7 @@
 
         redbreak.push(Qcenter.position);
         Qcenter.setMap(map);
-        Qcenter.addListener('click', function() {
-          		infowindP.open(map, Qcenter);
-        	});
-
-        var infowindQ = new google.maps.InfoWindow({
-          		content: 'Qadams'
-        	});
+        gettraindata(Qcenter);
 
         var Qadams = new google.maps.Marker({
           position: {lat: 42.233391, lng: -71.007153},
@@ -293,14 +262,9 @@
 
         redbreak.push(Qadams.position);
         Qadams.setMap(map);
-        Qadams.addListener('click', function() {
-          		infowindQ.open(map, Qadams);
-        	});
+        gettraindata(Qadams);
 
-        var infowindR = new google.maps.InfoWindow({
-          		content: 'Braintree'
-        	});
-
+    
         var Braintree = new google.maps.Marker({
           position: {lat: 42.2078543, lng: -71.0011385},
           title: 'Hello World!',
@@ -310,13 +274,8 @@
 
         redbreak.push(Braintree.position);
         Braintree.setMap(map);
-        Braintree.addListener('click', function() {
-          		infowindR.open(map, Braintree);
-        	});
+        gettraindata(Braintree);
 
-        var infowindS = new google.maps.InfoWindow({
-          		content: 'Savhill'
-        	});
 
         var Savhill = new google.maps.Marker({
           position: {lat: 42.31129, lng: -71.053331},
@@ -326,13 +285,7 @@
         });
         stationarr.push(Savhill.position);
         Savhill.setMap(map);
-        Savhill.addListener('click', function() {
-          		infowindS.open(map, Savhill);
-        	});
-
-        var infowindT = new google.maps.InfoWindow({
-          		content: 'Fieldscorn'
-        	});
+        gettraindata(Savhill);
 
         var Fieldscorn = new google.maps.Marker({
           position: {lat: 42.300093, lng: -71.061667},
@@ -342,13 +295,7 @@
         });
         stationarr.push(Fieldscorn.position);
         Fieldscorn.setMap(map);
-        Fieldscorn.addListener('click', function() {
-          		infowindT.open(map, Fieldscorn);
-        	});
-
-        var infowindU = new google.maps.InfoWindow({
-          		content: 'Shawmut'
-        	});
+        gettraindata(Fieldscorn);
 
         var Shawmut = new google.maps.Marker({
           position: {lat: 42.29312583, lng: -71.06573796000001},
@@ -358,13 +305,8 @@
         });
         stationarr.push(Shawmut.position);
         Shawmut.setMap(map);
-        Shawmut.addListener('click', function() {
-          		infowindU.open(map, Shawmut);
-        	});
-
-        var infowindV = new google.maps.InfoWindow({
-          		content: 'Ashmont'
-        	});
+        gettraindata(Shawmut);
+        
 
         var Ashmont = new google.maps.Marker({
           position: {lat: 42.284652, lng: -71.06448899999999},
@@ -374,9 +316,7 @@
         });
         stationarr.push(Ashmont.position);
         Ashmont.setMap(map);
-        Ashmont.addListener('click', function() {
-          		infowindV.open(map, Ashmont);
-        	});
+        gettraindata(Ashmont);
 
         var redpath = [
         {lat: 42.395428, lng: -71.142483},
@@ -479,4 +419,6 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
+
+
       }
