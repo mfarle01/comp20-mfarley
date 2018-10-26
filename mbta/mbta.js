@@ -45,7 +45,7 @@
               print = "Upcoming departures from "+ Marker.title + " : ";
               printnorth = "\nNorthbound Trains: ";
               printsouth = "\nSouthbound Trains: ";
-              if(loc.dat != null){
+              if(loc.data != null){
                 for (var i = 0; i < loc.data.length; i++) {
 
                     elem = loc.data[i].attributes;
