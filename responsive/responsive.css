@@ -1,21 +1,36 @@
 
 body{
 	background-image: url("software.png");
+	background-size: cover;
 }
+.software { 
+    width: 418px; 
+    height: 240px; 
+    overflow: hidden; 
+}
+.software img { 
+    width: 100%;
+}
+
 @media only screen and (max-width:600px;){
 	background: url(images/software.png)0 -1211px
+	background-position: 85% 50%;
 }
-@media only screen and (min-width:601px; max-width: 800px;){
+@media only screen and (min-width:601px) and (max-width: 800px){
 	background: url(images/software.png)0 -1211px
+	background-position: 85% 50%;
 }
-@media only screen and (min-width:801px; max-width: 1000px;){
+@media only screen and (min-width:801px) and (max-width: 1000px){
 	background: url(images/software.png)0 -1211px
+	background-position: 85% 50%;
 }
-@media only screen and (min-width:1001px; max-width: 1200px;){
+@media only screen and (min-width:1001px and (max-width: 1200px){
 	background: url(images/software.png)0 -1211px
+	background-position: 85% 50%;
 }
 @media only screen and (min-width:1201px;){
 	background: url(images/software.png)0 -1211px
+	background-position: 85% 50%;
 }
 /*.software {width: 600px;
 background: url(images/software.png)0 -1211px}*/
