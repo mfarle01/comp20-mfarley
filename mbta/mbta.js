@@ -13,13 +13,9 @@
                   }
 
                 var lon1 = lng;
-                //console.log("lon1 is " +lon1);
                 var lat1 = lat;
-                //console.log(lat1);
                 var lon2 = Marker2.lng;
-                //console.log(lon2);
                 var lat2 = Marker2.lat;
-                //console.log(lat2);
 
                 var R = 6371; // km
 
@@ -37,62 +33,61 @@
         }
 
         function gettraindata(Marker){
-        //console.log("in function");
 
         var request = new XMLHttpRequest();
-        //console.log(Marker.stop_id);
         url = "https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=" + Marker.stop_id;
-        //console.log(url);
         request.open("GET", url, true);
 
         request.onreadystatechange = function() {
           if (request.readyState == 4 && request.status == 200) {
-              //console.log("in if statement");
               dat = request.responseText;
-              //console.log(dat);
               loc = JSON.parse(dat);
-              //console.log(loc);
-              print = "Upcoming departures: ";
-              //console.log("loc" + loc.data.length);
-              for (var i = 0; i < loc.data.length; i++) {
-                //console.log("in for loop");
-                //elem = document.getElementById("departure_time");
-                  elem = loc.data[i].attributes;
-                  if(elem != null)
-                  {
-                    //console.log("in not null if");
-                      check = loc.data[i].attributes.departure_time;
-                      if(check ==  null){
-                        print += "time not aval ";
-                      }else{
-                        //console.log("in else statement");
-                        print += loc.data[i].attributes.departure_time;
-                        print += " ";
-                        //console.log(print);
-                      }
-                
-                  }else{
-                    //console.log("in main else");
-                  }
+              print = "Upcoming departures from "+ Marker.title + " : ";
+              printnorth = "\nNorthbound Trains: ";
+              printsouth = "\nSouthbound Trains: ";
+              if(loc.dat != null){
+                for (var i = 0; i < loc.data.length; i++) {
 
+                    elem = loc.data[i].attributes;
+                    if(elem != null)
+                    {
+                        if(loc.data[i].attributes.direction_id == 0)
+                        {
+                          if(check ==  null){
+                          printsouth += " Time not Avaliable ";
+                        
+                          }else{
+                            printsouth += " " + loc.data[i].attributes.departure_time;
+                          }
+                      }else{
+                          check = loc.data[i].attributes.departure_time;
+                          if(check ==  null){
+                            printnorth += " Time not Avaliable ";
+                          }else{
+                            printnorth += " " + loc.data[i].attributes.departure_time;
+                          }
+                        }
+                
+                    }else{
+
+                    }
+
+                  }
                 }
-                //print = "hello";
-              //console.log("print is " + print);
+              
               var infowind = new google.maps.InfoWindow({
-                  content: print
+                  content: print + printnorth + printsouth
               });
-              //console.log(infowind.content);
               Marker.addListener('click', function() {
                       infowind.open(map, Marker);
                 });
-              //return "hi";
+
               elem = document.getElementById("location");
               /// do stuff with data here
             }
             else if (request.readyState == 4 && request.status != 200) {
-                //console.log("in else statement");
               // think 404 or 500
-                document.getElementById("location").innerHTML = "<p>Whoops, something went terribly wrongo</p>";
+              document.getElementById("location").innerHTML = "<p>Whoops, something went terribly wrongo</p>";
               }
 
           };
@@ -110,17 +105,9 @@
         });
         var coords = {name:'Alewife',lat: 42.395428, lng: -71.142483};
         stationarr.push(coords);
-        //console.log(Alewife.position);
-        //console.log(stationarr[0]);
         Alewife.setMap(map);
         gettraindata(Alewife);
-        // var infowindA = new google.maps.InfoWindow({
-        //      content: gettraindata(Alewife)
-        //   });
-        // console.log(infowindA.content);
-        //Alewife.addListener('click', function() {
-          //		infowindA.open(map, Alewife);
-        	//});
+
 
         var Davis = new google.maps.Marker({
           position: {lat: 42.39674 , lng: -71.121815},
@@ -144,6 +131,7 @@
         stationarr.push(coords);
         Porter.setMap(map);
         gettraindata(Porter);
+
 
         var Harvard = new google.maps.Marker({
           position: {lat: 42.373362, lng: -71.118956},
@@ -180,6 +168,7 @@
         Kendall.setMap(map);
         gettraindata(Kendall);
 
+
         var Charles = new google.maps.Marker({
           position: {lat: 42.361166, lng:  -71.070628},
           title: 'Charles/MGH',
@@ -202,6 +191,7 @@
         stationarr.push(coords);
         Park.setMap(map);
         gettraindata(Park);
+
 
         var Crossing = new google.maps.Marker({
           position: {lat: 42.355518, lng:  -71.060225},
@@ -226,6 +216,7 @@
         South.setMap(map);
         gettraindata(South);
 
+
         var Broadway = new google.maps.Marker({
           position: {lat: 42.342622, lng:  -71.056967},
           title: 'Broadway',
@@ -237,6 +228,7 @@
         Broadway.setMap(map);
         gettraindata(Broadway);
 
+
         var Andrew = new google.maps.Marker({
           position: {lat: 42.330154, lng: -71.057655},
           title: 'Andrew',
@@ -247,6 +239,7 @@
         stationarr.push(coords);
         Andrew.setMap(map);
         gettraindata(Andrew);
+
 
         var redbreak = [];
 
@@ -261,6 +254,7 @@
         redbreak.push(JFK);
         JFK.setMap(map);
         gettraindata(JFK);
+
 
         var NorQuincy = new google.maps.Marker({
           position: {lat: 42.275275, lng: -71.029583},
@@ -288,6 +282,7 @@
         stationarr.push(coords);
         Wollaston.setMap(map);
         gettraindata(Wollaston);
+
        
 
         var Qcenter = new google.maps.Marker({
@@ -303,6 +298,7 @@
         Qcenter.setMap(map);
         gettraindata(Qcenter);
 
+
         var Qadams = new google.maps.Marker({
           position: {lat: 42.233391, lng: -71.007153},
           title: 'Quincy-adams',
@@ -315,6 +311,7 @@
         stationarr.push(coords);
         Qadams.setMap(map);
         gettraindata(Qadams);
+
 
     
         var Braintree = new google.maps.Marker({
@@ -342,6 +339,7 @@
         Savhill.setMap(map);
         gettraindata(Savhill);
 
+
         var Fieldscorn = new google.maps.Marker({
           position: {lat: 42.300093, lng: -71.061667},
           title: 'Fieldscorn',
@@ -352,6 +350,7 @@
         stationarr.push(coords);
         Fieldscorn.setMap(map);
         gettraindata(Fieldscorn);
+
 
         var Shawmut = new google.maps.Marker({
           position: {lat: 42.29312583, lng: -71.06573796000001},
@@ -420,16 +419,6 @@
           		strokeWeight: 2
         	});
 
-        // var i;
-        // for(i = 0; i < stationarr.length; i++)
-        // {
-        // 	var flightPath = new google.maps.Polyline({
-        //   		path: stationarr[i],
-        //   		geodesic: true,
-        //   		strokeColor: '#FF0000',
-        //   		strokeOpacity: 1.0,
-        //   		strokeWeight: 2
-        // 	});
 
         flightPath.setMap(map);
         flightbreak.setMap(map);
@@ -442,11 +431,6 @@
               lng: position.coords.longitude
             };
             map.setCenter(pos);
-            //distance = (float) pos.distanceTo(Alewife.position);
-            //console.log(distance);
-
-            //var distance = google.maps.geometry.spherical.computeDistanceBetween(pos,{lat: 42.39674 , lng: -71.121815}); 
-            //var contentsring = ''    
 
             var marker = new google.maps.Marker({
           		position: pos,
@@ -454,32 +438,17 @@
          	 	  title: 'Hello World!'
         	 });
             stationdistance = [];
-            //console.log(stationarr.length);
             small = 0;
             for(var i = 0; i < stationarr.length; i++){
-            //   //console.log(stationarr[i].title);
-            //   var mark1 = stationarr[i];
-            //   var pos1 = mark1.position;
-            //   //console.log(pos1);
-            //   var lat = pos1.lat;
-            //   //console.log(lat);
-            //   var lng = pos1.lng;
-            //   //console.log(lng);
-            //   var title = mark1.title;
-            //   console.log(Alewife.position);
               var stationmiles = {name: stationarr[i].name, miles: haversineDistance(stationarr[i].lat, stationarr[i].lng, pos)};
-
-            //   console.log("miles: " + stationmiles.miles);
                 stationdistance.push(stationmiles);
                 if(stationdistance[i].miles < stationdistance[small].miles){
                     small = i;
               }
             }
 
-            //var mark1 = stationarr[i];
-            //console.log(mark1);
           var infowindow = new google.maps.InfoWindow({
-              content: 'Closest T stop is ' + stationdistance[small].name
+              content: 'Closest T stop is ' + stationdistance[small].name + " " + stationdistance[small].miles + " mile(s) away"
           });
           var pos1 = {
               lat: stationarr[small].lat,
