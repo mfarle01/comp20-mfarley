@@ -1,0 +1,35 @@
+body{
+	/*font-family: Arial;*/
+	background: #90ee90;
+}
+
+h1{
+	text-align: center;
+	/*font-family: Arial;*/
+	background-color: #90ee90;
+}
+h2{
+	text-align: center;
+	/*font-family: Arial;*/
+	background-color: #90ee90;
+}
+h3{
+	text-align: center;
+	/*font-family: Arial;*/
+	background-color: #90ee90;
+}
+img {
+  max-width:100%;
+  height:auto;
+}
+p{
+	font-size:24px;
+	text-align: center;
+	/*color: violet;*/
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
