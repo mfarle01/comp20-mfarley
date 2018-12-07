@@ -1,11 +1,11 @@
 1.This git repository was used to submit and get feedback for my course in web
 programming know as comp20 for fall 2019.
 
-2. My favorite assignment was the captain's log lab becuase I really liked 
+2.My favorite assignment was the captain's log lab becuase I really liked 
 working with local storage and just found how the data was saved to be really
 interesting. I also feel like I learned a lot while doing it about javascript.
 
-3. I think I have grown quite a bit since the start of this course. I have
+3.I think I have grown quite a bit since the start of this course. I have
 learned so much about how the web works and about html and javascript. I have
 also become much better at troubleshooting and problem solving when something
 isn't working or when how to complete an assigment is unclear.
