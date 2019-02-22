@@ -11,7 +11,7 @@ also become much better at troubleshooting and problem solving when something
 isn't working or when how to complete an assigment is unclear.
 
 4.One of the most important things I have learned during this course
-is just how the web acctually works. Understanding the get, post and submit
+is just how the web actually works. Understanding the get, post and submit
 requests has been really important in my understanding of how servers work. I 
 have also found learning about html and the specific tags and styling aspects
 is really important.It is the backbone of every web page and it is important
