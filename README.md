@@ -17,5 +17,6 @@ have also found learning about html and the specific tags and styling aspects
 is really important.It is the backbone of every web page and it is important
 to know.
 
-5.I would like to delve deeper into server stuff. I found assigment 3 really interesting righting the get and posts routes and I just think there is a lot to
-learn when it comes to servers. 
+5.I would like to delve deeper into server stuff. I found assigment 3 really 
+interesting writing the get and posts routes and I just think there is a lot
+to learn when it comes to servers. 
